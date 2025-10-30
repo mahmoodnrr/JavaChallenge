@@ -68,7 +68,7 @@ public class WordHelper {
 
     private static ArrayList<Character> handleRemovingLetters(StringBuilder letters, String word)
     {
-        ArrayList<Character> removedLetters = new ArrayList<Character>();
+        ArrayList<Character> removedLetters = new ArrayList<>();
         for (char c : word.toCharArray()) {
             int index = letters.indexOf(String.valueOf(c));
             if (index != -1) {
