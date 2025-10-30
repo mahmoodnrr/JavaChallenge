@@ -11,20 +11,29 @@ public class WordHelper {
         return wordLength > 0 && !letters.isEmpty();
     }
 
+    /**
+     * This method takes a dictionary (list of valid English words), a word length and a set of letters.
+     * It checks if we have enough letters to form a word from the given set of letters.
+     * If a valid square word is formed returns true, otherwise false
+     * param {Set<String>, int, String}
+     * @return boolean
+     */
     public static boolean findValidWordList(Set<String> dictionary, int wordLength, String letters) {
 
-        StringBuilder letterList = new StringBuilder(letters);
-        ArrayList<String> dictionaryList = extractValidWords(dictionary, wordLength);
-        ArrayList<String> wordList = new ArrayList<>();
-
-        buildValidWordList(dictionaryList, wordLength, letterList, wordList);
+        buildValidWordList(extractValidWords(dictionary, wordLength), wordLength, new StringBuilder(letters), new ArrayList<>());
 
         if(!foundWords) System.out.println("There are no valid words");
         return foundWords;
     }
 
+    /**
+     * This method searches each word in the dictionary and checks if there are enough letters to form it.
+     * The search uses recursion to check every possible outcome.
+     * param {Set<String>, int, StringBuilder, String}
+     */
     private static void buildValidWordList(ArrayList<String> dictionary, int wordLength, StringBuilder letters, ArrayList<String> wordList) {
 
+        // If our word list size matches n (word length, then we have formed a word square
         if(wordList.size() == wordLength) {
             foundWords = true;
             System.out.println("Word square found: " + wordList);
@@ -66,6 +75,12 @@ public class WordHelper {
         }
     }
 
+    /**
+     * This method handles removing letters from the given set of letters
+     * so that we track remaining letters.
+     * param {StringBuilder, String}
+     * @return ArrayList<Character>
+     */
     private static ArrayList<Character> handleRemovingLetters(StringBuilder letters, String word)
     {
         ArrayList<Character> removedLetters = new ArrayList<>();
@@ -79,15 +94,27 @@ public class WordHelper {
         return removedLetters;
     }
 
+    /**
+     * This method handles prefixing so that the next search looks for a word starting with
+     * letter(s) of previous word(s)
+     * param {ArrayList<String>, int}
+     * @return ArrayList<String>
+     */
     private static String prefixBuilder(ArrayList<String> wordList, int WordListSize) {
         StringBuilder prefix = new StringBuilder();
 
+        // Get prefix from the current words in the list
         for(String word : wordList) {
             prefix.append(word.charAt(WordListSize));
         }
         return prefix.toString();
     }
 
+    /**
+     * This method checks if current word can be formed from the given set of letters
+     * param {String, StringBuilder}
+     * @return boolean
+     */
     private static boolean canFormWord(String word, StringBuilder letters) {
         // Check each letter exists in the pool
         for(char c : word.toCharArray()) {
@@ -98,6 +125,11 @@ public class WordHelper {
         return true;
     }
 
+    /**
+     * This method extracts words that match the word length provided in the input
+     * param {Set<String>, int}
+     * @return ArrayList<String>
+     */
     private static ArrayList<String> extractValidWords(Set<String> dictionary, int wordLength) {
         ArrayList<String> wordList = new ArrayList<>();
         for(String word : dictionary) {

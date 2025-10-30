@@ -7,8 +7,7 @@ public class Main {
             int num = Integer.parseInt(args[0]);
             String inputs = args[1];
 
-            WordsUtil wordsUtil = new WordsUtil();
-             new WordController(num, inputs, wordsUtil.getDictionary());
+             new WordController(num, inputs, new WordsUtil().getDictionary());
         }
         catch(Exception e){
             System.out.println(e.getMessage());
