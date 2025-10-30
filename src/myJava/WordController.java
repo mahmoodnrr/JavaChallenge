@@ -4,8 +4,8 @@ import java.util.Set;
 
 public class WordController {
 
-    private int wordLength;
-    private String letters;
+    private final int wordLength;
+    private final String letters;
 
     public WordController(int wordLength, String letters, Set<String> dictionary)
     {
@@ -15,23 +15,25 @@ public class WordController {
         findWords(dictionary);
     }
 
-    public String getLetters()
-    {
-        return letters;
-    }
-    public int getWordLength()
-    {
-        return wordLength;
-    }
-
+    /**
+     * Validates Inputs
+     * @return boolean
+     */
     private boolean validateInputs()
     {
         return WordHelper.checkInputsAreEmpty(wordLength, letters);
     }
 
+    /**
+     * Find valid English words from a set of letters.
+     * @return boolean
+     */
     private boolean findWords(Set<String> dictionary)
     {
-        if(!validateInputs()) return false;
+        if(!validateInputs()){
+            System.out.println("Invalid inputs.");
+            return false;
+        }
 
         return WordHelper.findValidWordList(dictionary, wordLength, letters);
     }
