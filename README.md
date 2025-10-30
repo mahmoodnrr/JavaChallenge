@@ -9,7 +9,10 @@ This Java program generates valid english words when given a set of letters and 
 - Dictionary file like "words.txt" - included in this project
 
 ## Project Structure
-src/myJava/*.java
+src/myJava/test
+myJava/*.java
+test/WordHelperTest
+
 words.txt <- dictionary file
 
 ## How to Run
